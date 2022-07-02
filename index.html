@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="icon" type="image/png" href="/images/favicon.png">-->
+    <title>Cache-based Targeted Deanonymization Attacks</title>
+
+    <style>
+        html {
+    font-size: 62.5%;
+}
+
+table {border: none;}
+
+body {
+    margin: 0;
+    font-family: open sans, HelveticaNeue, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #222;
+}
+
+h2 {
+    font-family: Montserrat, helvetica, arial, sans-serif;
+    margin-top: 22pt;
+}
+
+h3 {
+    font-family: Montserrat, helvetica, arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 2.4rem;
+    margin-bottom: 5pt;
+    /* padding-bottom: .5rem; */
+}
+
+h4 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 2.6rem;
+    /* padding: 1.4rem 0 1rem; */
+}
+
+p {
+    font-size: 1.6rem;
+    margin-top: 8pt;
+    margin-bottom: 8pt;
+}
+
+a {
+    color: #125CCA;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3BA3BB;
+}
+
+ul {
+    margin-top: 8pt;
+    margin-bottom: 8pt;
+}
+
+.toc {
+    padding: 0;
+    margin-bottom: 15pt;
+}
+
+.toc li {
+    display: inline-block;
+    position: relative;
+    width: 49%;
+    box-sizing: border-box;
+    background-color: #DDE8EF;
+    list-style-type: none;
+    text-align: center;
+}
+
+.toc li:not(:first-of-type) {
+    margin-left: 1%;
+}
+
+.toc li:hover {
+    background-color: #B3E1EF;
+}
+
+.toc a {
+    display: inline-block;
+    width: 100%;
+    padding: 2px 0 3px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #464646;
+}
+
+section {
+    position: relative;
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+section>* {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.illustrated {}
+
+img {
+    display: block;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.illustration {
+    max-height: 350px;
+    max-width: 100%;
+}
+
+#intro {
+    padding-top: 120px;
+}
+
+#intro p {
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 3rem;
+    padding-top: 2rem;
+}
+
+header {
+    position: relative;
+    width: 100%;
+    padding: 10px 0 75px;
+    background-color: #96DDFF;
+}
+
+h1 {
+    font-family: Montserrat, helvetica, arial, sans-serif;
+    font-size: 6rem;      /* font-size: 6rem; */
+    font-weight: 700;       /* font-weight: 700; */
+    line-height: 6.5rem;
+    text-align: center;
+    color: #06356e;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    -webkit-transform: translate(-50%, 50%);
+    ms-transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%);
+    width: 286px;
+    height: 286px;
+    background-image: url("/images/Hertzbleed-logo.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/*table style from bootstrap*/
+table {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 1rem 0;
+}
+
+h1 {
+    margin-top: 25px;
+    margin-bottom: 60px;
+}
+
+table th,
+table td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+}
+
+table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+
+.table-condensed th,
+.table-condensed td {
+    padding: 5px;
+}
+
+.form-inline {
+    padding: 1.5rem 3rem 3rem;
+    background-color: #DDE8EF;
+}
+
+label {
+    display: block;
+}
+
+input,
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: open sans, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 1rem;
+}
+
+input {
+    padding: 6px 12px;
+    width: 45%;
+}
+
+button {
+    color: white;
+    background-color: #F1592A;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+button:hover,
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #3BA3BD;
+}
+
+button:active {
+    box-shadow: inset 0 1px 1px 1px rgba(0, 0, 0, .4);
+}
+
+.question-list {
+    margin-bottom: 2rem;
+}
+
+/* .question-list li {
+margin-left: 1.8rem;
+} */
+
+.footer-logo {
+    padding-bottom: 2rem;
+    margin-left: 50%;
+    -webkit-transform: translateX(-50%);
+    ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 150px;
+    height: 227px;
+    background-image: url("/images/Hertzbleed-logo-with-text.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+footer {
+    border-top: 1px solid #ccc;
+    padding: 1rem 3rem;
+}
+
+.text-muted {
+    font-size: 13px;
+    color: #888;
+}
+    </style>
+    <style>
+          /* montserrat-regular - latin */
+  @font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	src: local(''),
+		 url('../font/montserrat-v24-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('../font/montserrat-v24-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* montserrat-600 - latin */
+  @font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 600;
+	src: local(''),
+		 url('../font/montserrat-v24-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('../font/montserrat-v24-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* montserrat-italic - latin */
+  @font-face {
+	font-family: 'Montserrat';
+	font-style: italic;
+	font-weight: 400;
+	src: local(''),
+		 url('../font/montserrat-v24-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('../font/montserrat-v24-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* montserrat-600italic - latin */
+  @font-face {
+	font-family: 'Montserrat';
+	font-style: italic;
+	font-weight: 600;
+	src: local(''),
+		 url('../font/montserrat-v24-latin-600italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('../font/montserrat-v24-latin-600italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* montserrat-700 - latin */
+  @font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	src: local(''),
+		 url('../font/montserrat-v24-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('../font/montserrat-v24-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* montserrat-700italic - latin */
+  @font-face {
+	font-family: 'Montserrat';
+	font-style: italic;
+	font-weight: 700;
+	src: local(''),
+		 url('../font/montserrat-v24-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('../font/montserrat-v24-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* open-sans-regular - latin */
+  @font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: local(''),
+		 url('../font/open-sans-v29-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('../font/open-sans-v29-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* open-sans-italic - latin */
+  @font-face {
+	font-family: 'Open Sans';
+	font-style: italic;
+	font-weight: 400;
+	src: local(''),
+		 url('../font/open-sans-v29-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+		 url('../font/open-sans-v29-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+    </style>
+  </head>
+
+  <body>
+
+      <header id="top">
+        <h1>Cache-based Targeted Deanonymization Attacks</h1>
+        <div class="logo"></div>
+      </header>
+
+      <section id="intro">
+        <ul class="toc">
+          <li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">Paper</a>
+          </li><li><a href="#questions-and-answers">Q&amp;A</a></li>
+        </ul>
+      </section>
+
+      <section>
+
+        <p>On the Internet, the casual person surfing a website has a reasonable expectation that their identity remains private. We reveal new cache-based target deanonymization attacks which threaten user anonymity: An attacker who has complete or partial control over a website can learn whether a specific target (i.e., a unique individual) is browsing the website. The attacker knows this target only through a public identifier, such as an email address or a Twitter handle.</p>
+        <p>The attacks leverage the sharing/blocking functionality provided by resource-sharing services such as YouTube, Google Drive, Dropbox, or Twitter. The target user is assumed to be logged into such a sharing service. The attacks exploit the CPU cache side channel on the target’s device, and can bypass isolation mechanisms and various defenses deployed by browser vendors or resource-sharing services.</p>
+        <p>We evaluated the attacks on multiple hardware microarchitectures, multiple operating systems and multiple browser versions, including the highly-secure Tor Browser, and demonstrated practical targeted deanonymization attacks on major sites, including Google, Twitter, LinkedIn, TikTok, Facebook, Instagram and Reddit. The attack runs in less than 3 seconds in most cases, and can be scaled to target a large number of users.</p>
+        <h2 id="research-paper">Research Paper</h2>
+        <p>A paper describing the attacks will appear in the 31st USENIX Security Symposium (Boston, 10–12 August, 2022) with the following title:</p>
+        <ul>
+            <li><em>Targeted Deanonymization via the Cache Side Channel: Attacks and Defenses
+                <a href="281290.bib">(BibTex entry for citations)</a>
+                </em></li>
+        </ul>
+        <p>A preprint of the paper is available <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">here</a>. The paper is the result of a collaboration between a group of researchers at the New Jersey Institute of Technology: <a href="https://web.njit.edu/~mz334/">Mojtaba Zaheri</a>, <a href="https://web.njit.edu/~yo43/">Yossi Oren</a>, and <a href="https://web.njit.edu/~crix/">Reza Curtmola</a>.</p>
+        <h2 id="questions-and-answers">Questions and Answers</h2>
+        <h3 id="should-i-be-worried">Why is this relevant and should I be worried?</h3>
+        <p>The attack impact may be different for different categories of Internet users. If you are an average user, you may not perceive this as a privacy threat (although this is highly dependent on each user’s particular circumstances). However, if you belong to certain categories of users, then you may be significantly impacted. Individuals who organize and participate in political protest, who work as journalists reporting on inconvenient topics, network with fellow members of their minority group, or even purchase embarrassing or potentially incriminating personal items, may risk their life and liberty if their identity becomes known to malicious actors.</p>
+        <h3 id="what-is-the-impact">What is the impact of these targeted deanonymization attacks</h3>
+        <p>When you visit a random website, a malicious actor who has complete or partial control over the website is able to learn that it is you in particular who are currently browsing the website. For this, the malicious actor only needs to know a public identifier associated with you, such as your email address or your Twitter handle. The attack also requires that you are logged into one of many resource-sharing services, such as YoutTube (or any of the Google properties such as Google Drive, GMail, Google Photos, etc.), Facebook, Twitter, etc. Many users routinely stay persistently logged into such services.</p>
+        <p>Knowing the precise identity of the person who is currently visiting a website can be the starting point for a range of nefarious targeted activities that can be executed by the operator of that website (for example, <a href="https://www.wired.com/story/hermit-spyware-rcs-labs/">surveillance-for-hire</a> activities).</p>
+        <p><em>Motivating example:</em> Consider a state-sponsored adversary who has purchased, at great expense, a zero-day exploit, which it wishes to install on the computer of a journalist with a well-known Twitter handle. The adversary has also compelled a local website to include code that can install this exploit. If this exploit were to be installed on many devices, however, this would increase the risk of the exploit being detected by white-hat security researchers. Therefore, the state adversary wishes to first verify, using the well-known Twitter handle, that the user currently connecting to the website is the target journalist, and only then to deploy its exploit.</p>
+        <p><em>Motivating example:</em> Consider the case where a law enforcement agency has covertly taken control of an underground extremist forum. The agency wishes to identify the users of this forum, but these users use pseudonyms to connect to the forum. The agency, however, has also gathered a list of Facebook accounts who are suspected to be users of this forum. The law enforcement agency would like to cross-reference the pseudonyms with this list of potential suspects.</p>
+        <h3 id="who-is-vulnerable">Who is vulnerable?</h3>
+        <p>Our work reveals that the attack surface for targeted deanonymization attacks is drastically larger than previously considered. We experimentally show that the attack can be executed on a diverse set of targets including desktop and mobile systems with multiple CPU microarchitectures (Intel, Apple M1, Qualcomm CPUs), multiple operating systems (Windows, macOS, Android), multiple browsers (Chrome, Safari, Firefox, Tor Browser), and multiple highly popular resource sharing services (Google, Twitter, LinkedIn, TitTok, Facebook, Instagram, Reddit). When considering together the collection of users of these services, we conclude that <em>a large majority of Internet users are vulnerable.</em></p>
+        <h3 id="overview-of-the-attack">Can you provide an overview of the attack?</h3>
+        <p>The attack builds on a leaky resource attack by using CPU cache side channels instead of cross-site leaks. In this way, the range of attack scenarios (i.e., affected browsers and resource-sharing services) is considerably larger.</p>
+        <p>The attack consists of two phases, setup and execution. In the <em>setup phase</em>, the attacker uploads a resource to a resource-sharing service, and then binds it to the victim’s identity. There are two approaches to perform this binding. In the sharing-based approach, the attacker privately shares the resource with the target (e.g., by using the victim’s email address or user ID with the service). In the blocking-based approach, the attacker makes the resource public, and then blocks the target from viewing any resources owned by the attacker. Next, the attacker embeds this resource into an attacker-controlled webpage.</p>
+        <p>In the <em>execution phase</em>, the attacker causes the target to visit the attack page (steps 1 and 2). As the target’s browser renders the page, it makes a cross-site request for the embedded resource to the sharing service (steps 3 and 4), passing the user’s authentication cookies. The response of the sharing website to this request depends on the target’s identity. With the sharing-based approach, the response to this cross-site request contains the shared resource if the user is the target, and an error otherwise (step 5). With the blocking-based approach, the opposite happens – the response contains an error for the blocked target, and the shared resource for other users.</p>
+        <img src="attack_alternative.png" type="image/png" width="350px" style="vertical-align:middle">
+        <p>In the final step of the attack, the attacker needs to discover whether the shared resource was loaded. The Same-Origin policy prevents the attacker from directly reading out the cross-origin response. However, by using a browser-based CPU cache side channel, the attacker is able to learn if the resource has been loaded or not. Specifically, the attacker page uses Javascript to measure the contention to the CPU cache (step 6) – depending on whether the resource is being loaded or not, the contention to access the CPU cache will have distinct patterns.</p>
+        <p>The following figures illustrate the concept of our attack. On the left side, we see the cache side channel traces for targeted and non-targeted users. The traces start to diverge around the 200 ms point. On the right side, we see the accuracy of a machine learning classifier, which is provided with increasingly large subsets of the side-channel trace. An attacker observing the side-channel trace can quickly and effectively tell apart target and non-target users through the cache side channel, without relying on any cross-site leaks.</p>
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <th>
+                    <img src="average.png" type="image/png" width="350px">
+                </th>
+                <th>
+                    <img src="accuracy.png" type="image/png" width="350px">
+                </th>
+            </tr>
+        </table>
+        <p>For more details, please refer to our <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">technical paper</a>.</p>
+        <h3 id="is-this-new">Is this a new attack?</h3>
+        <p>Yes. Unlike previous targeted deanonymization attacks, we do not assume the existence of a cross-site leak. Instead, our approach uses the CPU cache side channel. In addition, we introduce several novel techniques to significantly increase the potential impact of these attacks: we increase the attack’s target population by applying it to highly-popular services which have no currently-exploitable cross-site leaks, including GMail, Twitter and Facebook; we also successfully execute the attack on browsers that have a strict policy of not allowing cookies to be attached to cross-site requests, including Safari and Tor Browser.</p>
+        <p>Targeted deanonymization attacks can be leveraged to uniquely identify a target. Other known types of de-anonymization techniques, such as third-party tracking (e.g., tracking pixels or tracking IPs) or social media fingerprinting, are more coarse-grained and do not provide this level of accuracy.</p>
+        <h3 id="how-can-i-tell-if-i-am-being-targeted">How can I tell if I am being targeted?</h3>
+        <p>Most of the techniques used in a cache-based targeted deanonymization attack are quite innocuous. For example, loading a media resource happens frequently and does not usually raise suspicion. For some combination of browsers and sharing services, the attack needs to open a new browser tab or a new browser window, but in those cases the attack takes specific steps to put the new tab/window in the background, making the attack less noticeable by the user. The actual measuring of the CPU cache is stealthy and users have no indication they are being targeted.</p>
+        <h3 id="what-is-a-cpu-side-channel-attack">What is a CPU side channel attack?</h3>
+        <p>A side channel is a mechanism to learn (usually private) information indirectly, by analyzing the use of a shared resource. Side-channel attacks are attacks that analyze the physical implementation artifacts of a system in order to gain an insight into its secret internal state. In our setting, we use microarchitectural cache attacks, which allow a spy process to observe the memory access patterns of a victim process over time, and use these access patterns to discover secrets about the victim.</p>
+        <h3 id="did-you-release-the-source-code-for-the-attack">Did you release the source code for the attack?</h3>
+        <p>To help the research community understand our discovered attacks and design ways to defend against them, we have released the source code and other technical artifacts in a public repository, which is available at <a href="https://github.com/leakuidatorplusteam/artifacts">GitHub</a></p>
+        <h3 id="is-there-a-defense">Is there a defense against these attacks?</h3>
+        <p>Unfortunately, we are not aware of a counter-measure that provides 100% protection while also preserving usability and efficiency. We provide several options to mitigate the attack:</p>
+        <ol>
+            <li>Leakuidator+ is a browser extension which can successfully block the attack. It is available on the <a href="https://chrome.google.com/webstore/detail/leakuidator%2B/hhfpajcjkikoocmmhcimllpinjnbedll">Chrome Web Store</a> (for the Chrome browser) and on the <a href="https://addons.mozilla.org/en-US/firefox/addon/leakuidatorplus/">Firefox Add-ons website</a> (for the Firefox browser). The extension was shown to incur a small performance overhead. Still, there are certain browsing scenarios in which the user experience may be negatively affected by the use of the extension. In addition, the extension is not available for the Apple Safari and Chrome Android browsers.</li>
+            <li>A new potential defense strategy against some of the attack variants emerged from our discussions with the affected services and the browser vendors. We initiated a <a href="https://github.com/w3c/webappsec-fetch-metadata/issues/83">proposal</a> to extend the W3C standard for fetch metadata HTTP request headers.</li>
+            <li>In our <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">technical article</a>, we provide an extensive set of recommendations for sharing service owners, browser vendors, and Internet end users.</li>
+        </ol> 
+        <h3 id="when-did-you-disclose">When did you disclose the attacks?</h3>
+        <p>We disclosed our findings, together with proof-of-concept code, to the affected browser vendors (Google Chrome, Mozilla Firefox, Apple Safari and WebKit) and sharing services (Google, Twitter, LinkedIn, TikTok, Facebook, Instagram and Reddit) in January 2022. At the time of the writing, the following reports were still classified:</p>
+        <p><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1285604">https://bugs.chromium.org/p/chromium/issues/detail?id=1285604</a> (Chromium)</p>
+        <p><a href="http://bugzilla.mozilla.org/show_bug.cgi?id=1749129">http://bugzilla.mozilla.org/show_bug.cgi?id=1749129</a> (Firefox)</p>
+        <h3 id="plan-to-mitigate">Do the affected browsers vendors plan to mitigate the attacks?</h3>
+        <p>CPU cache side channels are powerful attacks that bypass software-imposed boundaries. As such, there is no immediate fix to our attacks that does not dramatically affect user browsing experience. We are discussing possible short and long-term countermeasures with browser vendors, but this is a slow process that will likely take time.</p>
+        <h3 id="Do-you-have-any-other-recommendations">Do you have any other recommendations to limit the attack’s effectiveness?</h3>
+        <p>In our <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">technical article</a>, we provide an extensive set of recommendations for sharing service owners, browser vendors, and Internet end users. We summarize here the guidance for end users:</p>
+        <ul>
+            <li>Install our browser extension (Leakuidator+)</li>
+            <li>Avoid unnecessary logins into sharing services</li>
+            <li>Consider using multiple devices</li>
+            <li>Several browsers offer protection against variants of the attack. For example, Safari, Tor Browser, and Firefox disable third-party cookies for cross-site requests by default.</li>
+        </ul>
+      </section>
+
+      <div class="footer-logo"></div>
+
+      <footer>
+        <p class="text-muted">Last updated on July 2, 2022.
+          This website was inspired by the <a href="https://drownattack.com/">DROWN attack</a> website, which was designed by <a href="http://sarahmadden.com/">Sarah Madden</a> and is free to use under a CC0 license.
+        </p>
+      </footer>
+
+  </body>
+
+</html>
