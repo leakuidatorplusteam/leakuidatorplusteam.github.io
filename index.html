@@ -414,7 +414,7 @@ figcaption { display: table-caption; caption-side: bottom ; }
 	<p>In the final step of the attack, the attacker needs to discover whether the shared resource was loaded. The Same-Origin policy prevents the attacker from directly reading out the cross-origin response. However, by using a browser-based CPU cache side channel, the attacker is able to learn if the resource has been loaded or not. Specifically, the attacker page uses Javascript to measure the contention to the CPU cache (step 6) – depending on whether the resource is being loaded or not, the contention to access the CPU cache will have distinct patterns.</p>
         <p>The following figure illustrates the concept of our attack. In the figure, we see that the cache side channel traces for targeted and non-targeted users start to diverge around the 200 ms point. An attacker observing the side-channel trace can quickly and effectively tell apart target and non-target users through the cache side channel, without relying on any cross-site leaks.</p>
         <figure>
-		<img src="average.png" type="image/png" width="400px" style="vertical-align:middle>
+		<img src="average.png" type="image/png" width="400px" style="vertical-align:middle">
 		<figcaption>Figure 5: A Proof-of-Concept Attack. The side-channel trace shows significant differences between the target and non-target state after less than 1 second.</figcaption>
 	</figure>
         <p>For more details, please refer to our <a href="preprint.pdf">technical paper</a>.</p>
