@@ -376,9 +376,23 @@ footer {
         </ul>
         <p>A preprint of the paper is available <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">here</a>. The paper is the result of a collaboration between a group of researchers at the New Jersey Institute of Technology: <a href="https://web.njit.edu/~mz334/">Mojtaba Zaheri</a>, <a href="https://web.njit.edu/~yo43/">Yossi Oren</a>, and <a href="https://web.njit.edu/~crix/">Reza Curtmola</a>.</p>
         <h2 id="questions-and-answers">Questions and Answers</h2>
+	<ul class="question-list">
+          <li><a href="#should-i-be-worried">Why is this relevant and should I be worried?</a></li>
+          <li><a href="#what-is-the-impact">What is the impact of these targeted deanonymization attacks</a></li>
+          <li><a href="#who-is-vulnerable">Who is vulnerable?</a></li>
+          <li><a href="#overview-of-the-attack">Can you provide an overview of the attack?</a></li>
+          <li><a href="#is-this-new">Is this a new attack?</a></li>
+          <li><a href="#how-can-i-tell-if-i-am-being-targeted">How can I tell if I am being targeted?</a></li>
+          <li><a href="#what-is-a-cpu-side-channel-attack">What is a CPU side channel attack?</a></li>
+          <li><a href="#did-you-release-the-source-code-for-the-attack">Did you release the source code for the attack?</a></li>
+          <li><a href="#is-there-a-defense">Is there a defense against these attacks?</a></li>
+          <li><a href="#when-did-you-disclose">When did you disclose the attacks?</a></li>
+          <li><a href="#plan-to-mitigate">Do the affected browsers vendors plan to mitigate the attacks?</a></li>
+          <li><a href="#Do-you-have-any-other-recommendations">Do you have any other recommendations to limit the attack’s effectiveness?</a></li>
+        </ul>
         <h3 id="should-i-be-worried">Why is this relevant and should I be worried?</h3>
         <p>The attack impact may be different for different categories of Internet users. If you are an average user, you may not perceive this as a privacy threat (although this is highly dependent on each user’s particular circumstances). However, if you belong to certain categories of users, then you may be significantly impacted. Individuals who organize and participate in political protest, who work as journalists reporting on inconvenient topics, network with fellow members of their minority group, or even purchase embarrassing or potentially incriminating personal items, may risk their life and liberty if their identity becomes known to malicious actors.</p>
-        <h3 id="what-is-the-impact">What is the impact of these targeted deanonymization attacks</h3>
+        <h3 id="what-is-the-impact">What is the impact of these targeted deanonymization attacks?</h3>
         <p>When you visit a random website, a malicious actor who has complete or partial control over the website is able to learn that it is you in particular who are currently browsing the website. For this, the malicious actor only needs to know a public identifier associated with you, such as your email address or your Twitter handle. The attack also requires that you are logged into one of many resource-sharing services, such as YoutTube (or any of the Google properties such as Google Drive, GMail, Google Photos, etc.), Facebook, Twitter, etc. Many users routinely stay persistently logged into such services.</p>
         <p>Knowing the precise identity of the person who is currently visiting a website can be the starting point for a range of nefarious targeted activities that can be executed by the operator of that website (for example, <a href="https://www.wired.com/story/hermit-spyware-rcs-labs/">surveillance-for-hire</a> activities).</p>
         <p><em>Motivating example:</em> Consider a state-sponsored adversary who has purchased, at great expense, a zero-day exploit, which it wishes to install on the computer of a journalist with a well-known Twitter handle. The adversary has also compelled a local website to include code that can install this exploit. If this exploit were to be installed on many devices, however, this would increase the risk of the exploit being detected by white-hat security researchers. Therefore, the state adversary wishes to first verify, using the well-known Twitter handle, that the user currently connecting to the website is the target journalist, and only then to deploy its exploit.</p>
