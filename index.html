@@ -357,7 +357,7 @@ footer {
 
       <section id="intro">
         <ul class="toc">
-          <li><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">Paper</a>
+          <li><a href="preprint.pdf">Paper</a>
           </li><li><a href="#questions-and-answers">Q&amp;A</a></li>
         </ul>
       </section>
@@ -374,11 +374,11 @@ footer {
                 <a href="281290.bib">(BibTex entry for citations)</a>
                 </em></li>
         </ul>
-        <p>A preprint of the paper is available <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">here</a>. The paper is the result of a collaboration between a group of researchers at the New Jersey Institute of Technology: <a href="https://web.njit.edu/~mz334/">Mojtaba Zaheri</a>, <a href="https://web.njit.edu/~yo43/">Yossi Oren</a>, and <a href="https://web.njit.edu/~crix/">Reza Curtmola</a>.</p>
+        <p>A preprint of the paper is available <a href="preprint.pdf">here</a>. The paper is the result of a collaboration between a group of researchers at the New Jersey Institute of Technology: <a href="https://web.njit.edu/~mz334/">Mojtaba Zaheri</a>, <a href="https://web.njit.edu/~yo43/">Yossi Oren</a>, and <a href="https://web.njit.edu/~crix/">Reza Curtmola</a>.</p>
         <h2 id="questions-and-answers">Questions and Answers</h2>
 	<ul class="question-list">
           <li><a href="#should-i-be-worried">Why is this relevant and should I be worried?</a></li>
-          <li><a href="#what-is-the-impact">What is the impact of these targeted deanonymization attacks</a></li>
+          <li><a href="#what-is-the-impact">What is the impact of these targeted deanonymization attacks?</a></li>
           <li><a href="#who-is-vulnerable">Who is vulnerable?</a></li>
           <li><a href="#overview-of-the-attack">Can you provide an overview of the attack?</a></li>
           <li><a href="#is-this-new">Is this a new attack?</a></li>
@@ -416,7 +416,7 @@ footer {
                 </th>
             </tr>
         </table>
-        <p>For more details, please refer to our <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">technical paper</a>.</p>
+        <p>For more details, please refer to our <a href="preprint.pdf">technical paper</a>.</p>
         <h3 id="is-this-new">Is this a new attack?</h3>
         <p>Yes. Unlike previous targeted deanonymization attacks, we do not assume the existence of a cross-site leak. Instead, our approach uses the CPU cache side channel. In addition, we introduce several novel techniques to significantly increase the potential impact of these attacks: we increase the attack’s target population by applying it to highly-popular services which have no currently-exploitable cross-site leaks, including GMail, Twitter and Facebook; we also successfully execute the attack on browsers that have a strict policy of not allowing cookies to be attached to cross-site requests, including Safari and Tor Browser.</p>
         <p>Targeted deanonymization attacks can be leveraged to uniquely identify a target. Other known types of de-anonymization techniques, such as third-party tracking (e.g., tracking pixels or tracking IPs) or social media fingerprinting, are more coarse-grained and do not provide this level of accuracy.</p>
@@ -431,7 +431,7 @@ footer {
         <ol>
             <li>Leakuidator+ is a browser extension which can successfully block the attack. It is available on the <a href="https://chrome.google.com/webstore/detail/leakuidator%2B/hhfpajcjkikoocmmhcimllpinjnbedll">Chrome Web Store</a> (for the Chrome browser) and on the <a href="https://addons.mozilla.org/en-US/firefox/addon/leakuidatorplus/">Firefox Add-ons website</a> (for the Firefox browser). The extension was shown to incur a small performance overhead. Still, there are certain browsing scenarios in which the user experience may be negatively affected by the use of the extension. In addition, the extension is not available for the Apple Safari and Chrome Android browsers.</li>
             <li>A new potential defense strategy against some of the attack variants emerged from our discussions with the affected services and the browser vendors. We initiated a <a href="https://github.com/w3c/webappsec-fetch-metadata/issues/83">proposal</a> to extend the W3C standard for fetch metadata HTTP request headers.</li>
-            <li>In our <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">technical article</a>, we provide an extensive set of recommendations for sharing service owners, browser vendors, and Internet end users.</li>
+            <li>In our <a href="preprint.pdf">technical article</a>, we provide an extensive set of recommendations for sharing service owners, browser vendors, and Internet end users.</li>
         </ol> 
         <h3 id="when-did-you-disclose">When did you disclose the attacks?</h3>
         <p>We disclosed our findings, together with proof-of-concept code, to the affected browser vendors (Google Chrome, Mozilla Firefox, Apple Safari and WebKit) and sharing services (Google, Twitter, LinkedIn, TikTok, Facebook, Instagram and Reddit) in January 2022. At the time of the writing, the following reports were still classified:</p>
@@ -440,7 +440,7 @@ footer {
         <h3 id="plan-to-mitigate">Do the affected browsers vendors plan to mitigate the attacks?</h3>
         <p>CPU cache side channels are powerful attacks that bypass software-imposed boundaries. As such, there is no immediate fix to our attacks that does not dramatically affect user browsing experience. We are discussing possible short and long-term countermeasures with browser vendors, but this is a slow process that will likely take time.</p>
         <h3 id="Do-you-have-any-other-recommendations">Do you have any other recommendations to limit the attack’s effectiveness?</h3>
-        <p>In our <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/zaheri">technical article</a>, we provide an extensive set of recommendations for sharing service owners, browser vendors, and Internet end users. We summarize here the guidance for end users:</p>
+        <p>In our <a href="preprint.pdf">technical article</a>, we provide an extensive set of recommendations for sharing service owners, browser vendors, and Internet end users. We summarize here the guidance for end users:</p>
         <ul>
             <li>Install our browser extension (Leakuidator+)</li>
             <li>Avoid unnecessary logins into sharing services</li>
