@@ -406,16 +406,10 @@ footer {
         <img src="attack_alternative.png" type="image/png" width="350px" style="vertical-align:middle">
         <p>In the final step of the attack, the attacker needs to discover whether the shared resource was loaded. The Same-Origin policy prevents the attacker from directly reading out the cross-origin response. However, by using a browser-based CPU cache side channel, the attacker is able to learn if the resource has been loaded or not. Specifically, the attacker page uses Javascript to measure the contention to the CPU cache (step 6) – depending on whether the resource is being loaded or not, the contention to access the CPU cache will have distinct patterns.</p>
         <p>The following figures illustrate the concept of our attack. On the left side, we see the cache side channel traces for targeted and non-targeted users. The traces start to diverge around the 200 ms point. On the right side, we see the accuracy of a machine learning classifier, which is provided with increasingly large subsets of the side-channel trace. An attacker observing the side-channel trace can quickly and effectively tell apart target and non-target users through the cache side channel, without relying on any cross-site leaks.</p>
-        <table cellspacing="0" cellpadding="0">
-            <tr>
-                <th>
-                    <img src="average.png" type="image/png" width="350px">
-                </th>
-                <th>
-                    <img src="accuracy.png" type="image/png" width="350px">
-                </th>
-            </tr>
-        </table>
+        <figure>
+		<img src="average.png" type="image/png" width="350px">
+		<figcaption>The side-channel trace shows significant differences between the target and non-target state after less than 1 second</figcaption>
+	</figure>
         <p>For more details, please refer to our <a href="preprint.pdf">technical paper</a>.</p>
         <h3 id="is-this-new">Is this a new attack?</h3>
         <p>Yes. Unlike previous targeted deanonymization attacks, we do not assume the existence of a cross-site leak. Instead, our approach uses the CPU cache side channel. In addition, we introduce several novel techniques to significantly increase the potential impact of these attacks: we increase the attack’s target population by applying it to highly-popular services which have no currently-exploitable cross-site leaks, including GMail, Twitter and Facebook; we also successfully execute the attack on browsers that have a strict policy of not allowing cookies to be attached to cross-site requests, including Safari and Tor Browser.</p>
