@@ -409,13 +409,13 @@ figcaption { display: table-caption; caption-side: bottom ; }
         <p>In the <em>execution phase</em>, the attacker causes the target to visit the attack page (steps 1 and 2). As the target’s browser renders the page, it makes a cross-site request for the embedded resource to the sharing service (steps 3 and 4), passing the user’s authentication cookies. The response of the sharing website to this request depends on the target’s identity. With the sharing-based approach, the response to this cross-site request contains the shared resource if the user is the target, and an error otherwise (step 5). With the blocking-based approach, the opposite happens – the response contains an error for the blocked target, and the shared resource for other users.</p>
          <figure>
 		<img src="attack_alternative.png" type="image/png" width="350px" style="vertical-align:middle">
-		<figcaption>Figure 1: The leaky resource attack (sharing-based approach).</figcaption>
+		<figcaption>The leaky resource attack (sharing-based approach).</figcaption>
 	</figure>
 	<p>In the final step of the attack, the attacker needs to discover whether the shared resource was loaded. The Same-Origin policy prevents the attacker from directly reading out the cross-origin response. However, by using a browser-based CPU cache side channel, the attacker is able to learn if the resource has been loaded or not. Specifically, the attacker page uses Javascript to measure the contention to the CPU cache (step 6) – depending on whether the resource is being loaded or not, the contention to access the CPU cache will have distinct patterns.</p>
         <p>The following figure illustrates the concept of our attack. In the figure, we see that the cache side channel traces for targeted and non-targeted users start to diverge around the 200 ms point. An attacker observing the side-channel trace can quickly and effectively tell apart target and non-target users through the cache side channel, without relying on any cross-site leaks.</p>
         <figure>
 		<img src="average.png" type="image/png" width="400px" style="vertical-align:middle">
-		<figcaption>Figure 5: A Proof-of-Concept Attack. The side-channel trace shows significant differences between the target and non-target state after less than 1 second.</figcaption>
+		<figcaption>A Proof-of-Concept Attack. The side-channel trace shows significant differences between the target and non-target state after less than 1 second.</figcaption>
 	</figure>
         <p>For more details, please refer to our <a href="preprint.pdf">technical paper</a>.</p>
         <h3 id="is-this-new">Is this a new attack?</h3>
